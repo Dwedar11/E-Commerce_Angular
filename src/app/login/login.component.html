@@ -1,0 +1,38 @@
+<div class="w-75 mx-auto py-5">
+    <h4 class="fw-bold my-4">Register Now: </h4>
+     <div *ngIf="apiError" class="alert alert-danger">{{apiError}}</div> 
+    <form (ngSubmit)="handleLogin(loginForm)" [formGroup]="loginForm">
+
+    
+        <label for="email">Email:</label>
+        <input formControlName="email" type="email" class="form-control mb-3" id="email">
+        <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="alert alert-danger">
+            <p *ngIf="loginForm.get('email')?.getError('email')" class="m-0 p-0">Email Invalid</p>
+            <p *ngIf="loginForm.get('email')?.getError('required')" class="m-0 p-0">Email Required</p>
+        </div>
+
+        <label for="password">Password:</label>
+        <input formControlName="password" type="password" autocomplete="false" class="form-control mb-3" id="password">
+        <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
+            class="alert alert-danger">
+            <p *ngIf="loginForm.get('password')?.getError('pattern')" class="m-0 p-0">Password Invalid : must be from 6
+                to 9 numbers and chrs</p>
+            <p *ngIf="loginForm.get('password')?.getError('required')" class="m-0 p-0">Password Required</p>
+        </div>
+
+
+
+        
+
+      
+      
+        <button  [disabled]="loginForm.invalid" type="submit"
+            class="d-block ms-auto btn bg-main border-0 ">
+        <i *ngIf="isLoading" class="fas fa-spinner fa-spin text-white"></i> 
+         <span *ngIf="!isLoading">Login</span>
+        </button>
+
+    </form> 
+    
+
+</div>
